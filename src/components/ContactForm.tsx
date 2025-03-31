@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,7 +20,8 @@ export default function ContactForm() {
   const [emailJsConfigured, setEmailJsConfigured] = useState(false);
   const [emailJsConfig, setEmailJsConfig] = useState({
     serviceId: "service_su5evcm",
-    templateId: "template_c0cp8md",
+    ownerTemplateId: "template_c0cp8md",
+    clientTemplateId: "template_client",
     publicKey: "JmODPdVdCt13yVm0I"
   });
 
@@ -36,7 +36,7 @@ export default function ContactForm() {
   };
 
   const saveEmailJsConfig = () => {
-    if (emailJsConfig.serviceId && emailJsConfig.templateId && emailJsConfig.publicKey) {
+    if (emailJsConfig.serviceId && emailJsConfig.ownerTemplateId && emailJsConfig.clientTemplateId && emailJsConfig.publicKey) {
       localStorage.setItem('emailjs-config', JSON.stringify(emailJsConfig));
       setEmailJsConfigured(true);
       toast({
@@ -61,7 +61,7 @@ export default function ContactForm() {
     const savedConfig = localStorage.getItem('emailjs-config');
     const config = savedConfig ? JSON.parse(savedConfig) : emailJsConfig;
     
-    if (!config.serviceId || !config.templateId || !config.userId) {
+    if (!config.serviceId || !config.ownerTemplateId || !config.clientTemplateId || !config.publicKey) {
       setIsSubmitting(false);
       toast({
         title: "Configurazione mancante",
@@ -74,8 +74,8 @@ export default function ContactForm() {
     
     try {
       // Send email to the driving school owner
-      const templateParams = {
-        to_email: "s.benanchietti.yt@gmail.com", // Change this to the actual owner's email
+      const ownerTemplateParams = {
+        to_email: "info@autoscuolabiella1.it", // Owner's email
         reply_to: formData.email,
         from_name: formData.name,
         from_email: formData.email,
@@ -86,13 +86,27 @@ export default function ContactForm() {
       
       await emailjs.send(
         config.serviceId,
-        config.templateId,
-        templateParams,
-        config.userId
+        config.ownerTemplateId,
+        ownerTemplateParams,
+        config.publicKey
       );
       
-      // Send confirmation email to the client (you'll need a separate template for this)
-      // For now, we'll simulate this
+      // Send confirmation email to the client
+      const clientTemplateParams = {
+        to_email: formData.email, // Client's email
+        to_name: formData.name,
+        service: formData.service,
+        school_name: "Autoscuola Biella 1",
+        school_phone: "+39 015 34315",
+        school_email: "info@autoscuolabiella1.it",
+      };
+      
+      await emailjs.send(
+        config.serviceId,
+        config.clientTemplateId,
+        clientTemplateParams,
+        config.publicKey
+      );
       
       toast({
         title: "Richiesta inviata!",
@@ -119,7 +133,7 @@ export default function ContactForm() {
   };
 
   // Check for existing configuration when component mounts
-  useState(() => {
+  useEffect(() => {
     const savedConfig = localStorage.getItem('emailjs-config');
     if (savedConfig) {
       try {
@@ -130,7 +144,7 @@ export default function ContactForm() {
         console.error("Error parsing saved EmailJS config:", error);
       }
     }
-  });
+  }, []);
 
   return (
     <section id="contatti" className="py-16">
@@ -164,23 +178,33 @@ export default function ContactForm() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="templateId">Template ID</Label>
+                    <Label htmlFor="ownerTemplateId">Template ID (Proprietario)</Label>
                     <Input
-                      id="templateId"
-                      name="templateId"
-                      value={emailJsConfig.templateId}
+                      id="ownerTemplateId"
+                      name="ownerTemplateId"
+                      value={emailJsConfig.ownerTemplateId}
                       onChange={handleEmailJsConfigChange}
                       placeholder="es. template_abc123"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="userId">User ID (Public Key)</Label>
+                    <Label htmlFor="clientTemplateId">Template ID (Cliente)</Label>
                     <Input
-                      id="userId"
-                      name="userId"
-                      value={emailJsConfig.userId}
+                      id="clientTemplateId"
+                      name="clientTemplateId"
+                      value={emailJsConfig.clientTemplateId}
                       onChange={handleEmailJsConfigChange}
-                      placeholder="es. user_abc123"
+                      placeholder="es. template_client123"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="publicKey">Public Key</Label>
+                    <Input
+                      id="publicKey"
+                      name="publicKey"
+                      value={emailJsConfig.publicKey}
+                      onChange={handleEmailJsConfigChange}
+                      placeholder="es. abc123def456"
                     />
                   </div>
                   <Button 
