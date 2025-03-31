@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <img
-              src="/lovable-uploads/fef2acea-f271-49a5-a419-bff4e9eda66f.png"
+              src="/lovable-uploads/fc26eac9-4b62-41bb-bb2c-e561fcf6d808.png"
               alt="Autoscuola Biella Uno"
               className="h-16 mb-4"
             />

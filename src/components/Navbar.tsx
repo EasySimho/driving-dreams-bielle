@@ -11,7 +11,7 @@ export default function Navbar() {
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center">
           <img 
-            src="/lovable-uploads/fef2acea-f271-49a5-a419-bff4e9eda66f.png" 
+            src="/lovable-uploads/fc26eac9-4b62-41bb-bb2c-e561fcf6d808.png" 
             alt="Autoscuola Biella Uno" 
             className="h-14 w-auto"
           />

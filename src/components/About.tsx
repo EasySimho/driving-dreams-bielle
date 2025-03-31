@@ -31,7 +31,7 @@ export default function About() {
               <div className="w-72 h-72 md:w-80 md:h-80 bg-biella-blue rounded-full absolute -top-6 -right-6 z-0"></div>
               <div className="w-72 h-72 md:w-80 md:h-80 bg-biella-red rounded-full absolute -bottom-6 -left-6 z-0"></div>
               <img
-                src="/lovable-uploads/fef2acea-f271-49a5-a419-bff4e9eda66f.png"
+                src="/lovable-uploads/fc26eac9-4b62-41bb-bb2c-e561fcf6d808.png"
                 alt="Autoscuola Biella Uno"
                 className="w-72 h-72 md:w-80 md:h-80 object-contain relative z-10 bg-white rounded-xl shadow-lg p-4"
               />
