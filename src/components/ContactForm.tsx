@@ -202,7 +202,7 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold mb-1">Indirizzo</h4>
-                  <p className="text-gray-600">Via XX Settembre, 17</p>
+                  <p className="text-gray-600">Via Fratelli Rosselli 23/B</p>
                   <p className="text-gray-600">13900 Biella (BI)</p>
                 </div>
               </div>
@@ -213,8 +213,8 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold mb-1">Telefono</h4>
-                  <p className="text-gray-600">+39 015 34315</p>
-                  <p className="text-gray-600">+39 333 1234567</p>
+                  <p className="text-gray-600">+39 015 402914</p>
+                  <p className="text-gray-600">+39 345 2928 159</p>
                 </div>
               </div>
               
@@ -224,17 +224,25 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold mb-1">Email</h4>
-                  <p className="text-gray-600">info@autoscuolabiella1.it</p>
+                  <p className="text-gray-600">info@biellauno.it</p>
                 </div>
               </div>
               
               <div>
                 <h4 className="text-lg font-semibold mb-3">Orari di Apertura</h4>
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="text-gray-600">Lunedì - Venerdì:</div>
-                  <div className="font-medium">9:00 - 12:30, 15:00 - 19:00</div>
+                  <div className="text-gray-600">Lunedì:</div>
+                  <div className="font-medium">09:00 - 12:00, 14:30 - 18:30</div>
+                  <div className="text-gray-600">Martedì:</div>
+                  <div className="font-medium">09:00 - 12:00, 15:00 - 19:00</div>
+                  <div className="text-gray-600">Mercoledì:</div>
+                  <div className="font-medium">09:00 - 12:00, 14:30 - 18:30</div>
+                  <div className="text-gray-600">Giovedì:</div>
+                  <div className="font-medium">09:00 - 12:00, 14:30 - 18:30</div>
+                  <div className="text-gray-600">Venerdì:</div>
+                  <div className="font-medium">09:00 - 12:00, 13:00 - 17:00</div>
                   <div className="text-gray-600">Sabato:</div>
-                  <div className="font-medium">9:00 - 12:00</div>
+                  <div className="font-medium">Chiuso</div>
                   <div className="text-gray-600">Domenica:</div>
                   <div className="font-medium">Chiuso</div>
                 </div>
