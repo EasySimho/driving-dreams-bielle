@@ -75,7 +75,7 @@ export default function ContactForm() {
     try {
       // Send email to the driving school owner
       const ownerTemplateParams = {
-        to_email: "info@autoscuolabiella1.it", // Owner's email
+        to_email: "s.benanchietti.yt@gmail.com", // Owner's email
         reply_to: formData.email,
         from_name: formData.name,
         from_email: formData.email,
