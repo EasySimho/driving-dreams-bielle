@@ -17,39 +17,18 @@ export default function ContactForm() {
     service: "Patente B"
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [emailJsConfigured, setEmailJsConfigured] = useState(false);
-  const [emailJsConfig, setEmailJsConfig] = useState({
+  
+  // Pre-configured EmailJS settings
+  const emailJsConfig = {
     serviceId: "service_su5evcm",
-    ownerTemplateId: "template_c0cp8md",
-    clientTemplateId: "template_client",
+    ownerTemplateId: "template_c0cp8md",  // Template per il proprietario
+    clientTemplateId: "template_8cmwq5k",  // Template per il cliente
     publicKey: "JmODPdVdCt13yVm0I"
-  });
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleEmailJsConfigChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setEmailJsConfig((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const saveEmailJsConfig = () => {
-    if (emailJsConfig.serviceId && emailJsConfig.ownerTemplateId && emailJsConfig.clientTemplateId && emailJsConfig.publicKey) {
-      localStorage.setItem('emailjs-config', JSON.stringify(emailJsConfig));
-      setEmailJsConfigured(true);
-      toast({
-        title: "Configurazione salvata!",
-        description: "Le credenziali di EmailJS sono state salvate correttamente.",
-      });
-    } else {
-      toast({
-        title: "Errore di configurazione",
-        description: "Per favore, compila tutti i campi di configurazione.",
-        variant: "destructive",
-      });
-    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -58,24 +37,10 @@ export default function ContactForm() {
     
     console.log("Form submitted:", formData);
     
-    const savedConfig = localStorage.getItem('emailjs-config');
-    const config = savedConfig ? JSON.parse(savedConfig) : emailJsConfig;
-    
-    if (!config.serviceId || !config.ownerTemplateId || !config.clientTemplateId || !config.publicKey) {
-      setIsSubmitting(false);
-      toast({
-        title: "Configurazione mancante",
-        description: "Per favore, configura EmailJS prima di inviare il modulo.",
-        variant: "destructive",
-      });
-      setEmailJsConfigured(false);
-      return;
-    }
-    
     try {
       // Send email to the driving school owner
       const ownerTemplateParams = {
-        to_email: "s.benanchietti.yt@gmail.com", // Owner's email
+        to_email: "info@autoscuolabiella1.it", // Email del proprietario
         reply_to: formData.email,
         from_name: formData.name,
         from_email: formData.email,
@@ -85,15 +50,15 @@ export default function ContactForm() {
       };
       
       await emailjs.send(
-        config.serviceId,
-        config.ownerTemplateId,
+        emailJsConfig.serviceId,
+        emailJsConfig.ownerTemplateId,
         ownerTemplateParams,
-        config.publicKey
+        emailJsConfig.publicKey
       );
       
       // Send confirmation email to the client
       const clientTemplateParams = {
-        to_email: formData.email, // Client's email
+        to_email: formData.email, // Email del cliente
         to_name: formData.name,
         service: formData.service,
         school_name: "Autoscuola Biella 1",
@@ -102,10 +67,10 @@ export default function ContactForm() {
       };
       
       await emailjs.send(
-        config.serviceId,
-        config.clientTemplateId,
+        emailJsConfig.serviceId,
+        emailJsConfig.clientTemplateId,
         clientTemplateParams,
-        config.publicKey
+        emailJsConfig.publicKey
       );
       
       toast({
@@ -132,20 +97,6 @@ export default function ContactForm() {
     }
   };
 
-  // Check for existing configuration when component mounts
-  useEffect(() => {
-    const savedConfig = localStorage.getItem('emailjs-config');
-    if (savedConfig) {
-      try {
-        const parsedConfig = JSON.parse(savedConfig);
-        setEmailJsConfig(parsedConfig);
-        setEmailJsConfigured(true);
-      } catch (error) {
-        console.error("Error parsing saved EmailJS config:", error);
-      }
-    }
-  }, []);
-
   return (
     <section id="contatti" className="py-16">
       <div className="container mx-auto px-4">
@@ -159,63 +110,6 @@ export default function ContactForm() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="bg-white rounded-lg shadow-lg p-8">
             <h3 className="text-2xl font-bold text-gray-800 mb-6">Richiedi Informazioni</h3>
-            
-            {!emailJsConfigured && (
-              <div className="mb-8 p-4 border border-yellow-300 bg-yellow-50 rounded-md">
-                <h4 className="font-semibold mb-2 text-yellow-800">Configurazione EmailJS richiesta</h4>
-                <p className="text-sm text-yellow-700 mb-4">
-                  Per attivare l'invio di email, inserisci le credenziali di EmailJS. Queste informazioni saranno salvate nel tuo browser.
-                </p>
-                <div className="space-y-4">
-                  <div>
-                    <Label htmlFor="serviceId">Service ID</Label>
-                    <Input
-                      id="serviceId"
-                      name="serviceId"
-                      value={emailJsConfig.serviceId}
-                      onChange={handleEmailJsConfigChange}
-                      placeholder="es. service_abc123"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="ownerTemplateId">Template ID (Proprietario)</Label>
-                    <Input
-                      id="ownerTemplateId"
-                      name="ownerTemplateId"
-                      value={emailJsConfig.ownerTemplateId}
-                      onChange={handleEmailJsConfigChange}
-                      placeholder="es. template_abc123"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="clientTemplateId">Template ID (Cliente)</Label>
-                    <Input
-                      id="clientTemplateId"
-                      name="clientTemplateId"
-                      value={emailJsConfig.clientTemplateId}
-                      onChange={handleEmailJsConfigChange}
-                      placeholder="es. template_client123"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="publicKey">Public Key</Label>
-                    <Input
-                      id="publicKey"
-                      name="publicKey"
-                      value={emailJsConfig.publicKey}
-                      onChange={handleEmailJsConfigChange}
-                      placeholder="es. abc123def456"
-                    />
-                  </div>
-                  <Button 
-                    onClick={saveEmailJsConfig}
-                    className="w-full bg-yellow-600 hover:bg-yellow-700"
-                  >
-                    Salva Configurazione
-                  </Button>
-                </div>
-              </div>
-            )}
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
@@ -291,7 +185,7 @@ export default function ContactForm() {
               <Button 
                 type="submit" 
                 className="w-full bg-biella-red hover:bg-red-700"
-                disabled={isSubmitting || !emailJsConfigured}
+                disabled={isSubmitting}
               >
                 {isSubmitting ? "Invio in corso..." : "Invia Richiesta"}
               </Button>
