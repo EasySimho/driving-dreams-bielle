@@ -46,6 +46,12 @@
     @apply bg-background text-foreground;
   }
 
+  .hero-background {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/lovable-uploads/c1a1b2b2-6e57-475b-b87c-c8ea362822bc.png');
+    background-size: cover;
+    background-position: center;
+  }
+
   .hero-gradient {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/lovable-uploads/fc26eac9-4b62-41bb-bb2c-e561fcf6d808.png');
     background-size: cover;

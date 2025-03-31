@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button";
 export default function Hero() {
   return (
     <section id="home" className="relative">
-      <div className="bg-gradient-to-r from-biella-blue/90 to-biella-red/80 py-20 md:py-32">
+      <div className="hero-background py-20 md:py-32">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl bg-black/60 p-6 md:p-8 rounded-lg backdrop-blur-sm">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
               Autoscuola Biella Uno
             </h1>
