@@ -18,14 +18,8 @@ export default function Footer() {
               La tua autoscuola di fiducia a Biella per conseguire qualsiasi tipo di patente.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-white hover:text-biella-red transition-colors">
+              <a href="https://www.facebook.com/BiellaUno" className="text-white hover:text-biella-red transition-colors">
                 <Facebook size={20} />
-              </a>
-              <a href="#" className="text-white hover:text-biella-red transition-colors">
-                <Instagram size={20} />
-              </a>
-              <a href="#" className="text-white hover:text-biella-red transition-colors">
-                <Twitter size={20} />
               </a>
             </div>
           </div>
@@ -64,10 +58,10 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-4">Contatti</h4>
             <address className="not-italic text-gray-400">
-              <p className="mb-2">Via XX Settembre, 17</p>
+              <p className="mb-2">Via Fratelli Rosselli 23/B</p>
               <p className="mb-2">13900 Biella (BI)</p>
-              <p className="mb-2">Tel: +39 015 34315</p>
-              <p className="mb-2">Email: info@autoscuolabiella1.it</p>
+              <p className="mb-2">Tel: +39 015 402914</p>
+              <p className="mb-2">Email: info@biellauno.it</p>
             </address>
           </div>
         </div>
