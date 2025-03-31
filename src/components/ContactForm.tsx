@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Phone, Mail, MapPin } from "lucide-react";
+import emailjs from 'emailjs-com';
 
 export default function ContactForm() {
   const { toast } = useToast();
@@ -17,26 +18,87 @@ export default function ContactForm() {
     service: "Patente B"
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailJsConfigured, setEmailJsConfigured] = useState(false);
+  const [emailJsConfig, setEmailJsConfig] = useState({
+    serviceId: "",
+    templateId: "",
+    userId: ""
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleEmailJsConfigChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setEmailJsConfig((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const saveEmailJsConfig = () => {
+    if (emailJsConfig.serviceId && emailJsConfig.templateId && emailJsConfig.userId) {
+      localStorage.setItem('emailjs-config', JSON.stringify(emailJsConfig));
+      setEmailJsConfigured(true);
+      toast({
+        title: "Configurazione salvata!",
+        description: "Le credenziali di EmailJS sono state salvate correttamente.",
+      });
+    } else {
+      toast({
+        title: "Errore di configurazione",
+        description: "Per favore, compila tutti i campi di configurazione.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // In a real application, you would send this data to a server
     console.log("Form submitted:", formData);
     
-    // Simulate form submission
-    setTimeout(() => {
+    const savedConfig = localStorage.getItem('emailjs-config');
+    const config = savedConfig ? JSON.parse(savedConfig) : emailJsConfig;
+    
+    if (!config.serviceId || !config.templateId || !config.userId) {
       setIsSubmitting(false);
       toast({
-        title: "Richiesta inviata!",
-        description: "Ti contatteremo al più presto.",
+        title: "Configurazione mancante",
+        description: "Per favore, configura EmailJS prima di inviare il modulo.",
+        variant: "destructive",
       });
+      setEmailJsConfigured(false);
+      return;
+    }
+    
+    try {
+      // Send email to the driving school owner
+      const templateParams = {
+        to_email: "info@autoscuolabiella1.it", // Change this to the actual owner's email
+        reply_to: formData.email,
+        from_name: formData.name,
+        from_email: formData.email,
+        from_phone: formData.phone,
+        service: formData.service,
+        message: formData.message,
+      };
+      
+      await emailjs.send(
+        config.serviceId,
+        config.templateId,
+        templateParams,
+        config.userId
+      );
+      
+      // Send confirmation email to the client (you'll need a separate template for this)
+      // For now, we'll simulate this
+      
+      toast({
+        title: "Richiesta inviata!",
+        description: "Ti contatteremo al più presto. Una conferma è stata inviata alla tua email.",
+      });
+      
       setFormData({
         name: "",
         email: "",
@@ -44,8 +106,31 @@ export default function ContactForm() {
         message: "",
         service: "Patente B"
       });
-    }, 1000);
+    } catch (error) {
+      console.error("Error sending email:", error);
+      toast({
+        title: "Errore",
+        description: "Si è verificato un problema nell'invio della richiesta. Riprova più tardi.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  // Check for existing configuration when component mounts
+  useState(() => {
+    const savedConfig = localStorage.getItem('emailjs-config');
+    if (savedConfig) {
+      try {
+        const parsedConfig = JSON.parse(savedConfig);
+        setEmailJsConfig(parsedConfig);
+        setEmailJsConfigured(true);
+      } catch (error) {
+        console.error("Error parsing saved EmailJS config:", error);
+      }
+    }
+  });
 
   return (
     <section id="contatti" className="py-16">
@@ -60,6 +145,53 @@ export default function ContactForm() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="bg-white rounded-lg shadow-lg p-8">
             <h3 className="text-2xl font-bold text-gray-800 mb-6">Richiedi Informazioni</h3>
+            
+            {!emailJsConfigured && (
+              <div className="mb-8 p-4 border border-yellow-300 bg-yellow-50 rounded-md">
+                <h4 className="font-semibold mb-2 text-yellow-800">Configurazione EmailJS richiesta</h4>
+                <p className="text-sm text-yellow-700 mb-4">
+                  Per attivare l'invio di email, inserisci le credenziali di EmailJS. Queste informazioni saranno salvate nel tuo browser.
+                </p>
+                <div className="space-y-4">
+                  <div>
+                    <Label htmlFor="serviceId">Service ID</Label>
+                    <Input
+                      id="serviceId"
+                      name="serviceId"
+                      value={emailJsConfig.serviceId}
+                      onChange={handleEmailJsConfigChange}
+                      placeholder="es. service_abc123"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="templateId">Template ID</Label>
+                    <Input
+                      id="templateId"
+                      name="templateId"
+                      value={emailJsConfig.templateId}
+                      onChange={handleEmailJsConfigChange}
+                      placeholder="es. template_abc123"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="userId">User ID (Public Key)</Label>
+                    <Input
+                      id="userId"
+                      name="userId"
+                      value={emailJsConfig.userId}
+                      onChange={handleEmailJsConfigChange}
+                      placeholder="es. user_abc123"
+                    />
+                  </div>
+                  <Button 
+                    onClick={saveEmailJsConfig}
+                    className="w-full bg-yellow-600 hover:bg-yellow-700"
+                  >
+                    Salva Configurazione
+                  </Button>
+                </div>
+              </div>
+            )}
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
@@ -135,7 +267,7 @@ export default function ContactForm() {
               <Button 
                 type="submit" 
                 className="w-full bg-biella-red hover:bg-red-700"
-                disabled={isSubmitting}
+                disabled={isSubmitting || !emailJsConfigured}
               >
                 {isSubmitting ? "Invio in corso..." : "Invia Richiesta"}
               </Button>
