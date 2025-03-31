@@ -20,9 +20,9 @@ export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [emailJsConfigured, setEmailJsConfigured] = useState(false);
   const [emailJsConfig, setEmailJsConfig] = useState({
-    serviceId: "",
-    templateId: "",
-    userId: ""
+    serviceId: "service_su5evcm",
+    templateId: "template_c0cp8md",
+    publicKey: "JmODPdVdCt13yVm0I"
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -36,7 +36,7 @@ export default function ContactForm() {
   };
 
   const saveEmailJsConfig = () => {
-    if (emailJsConfig.serviceId && emailJsConfig.templateId && emailJsConfig.userId) {
+    if (emailJsConfig.serviceId && emailJsConfig.templateId && emailJsConfig.publicKey) {
       localStorage.setItem('emailjs-config', JSON.stringify(emailJsConfig));
       setEmailJsConfigured(true);
       toast({
@@ -75,7 +75,7 @@ export default function ContactForm() {
     try {
       // Send email to the driving school owner
       const templateParams = {
-        to_email: "info@autoscuolabiella1.it", // Change this to the actual owner's email
+        to_email: "s.benanchietti.yt@gmail.com", // Change this to the actual owner's email
         reply_to: formData.email,
         from_name: formData.name,
         from_email: formData.email,
