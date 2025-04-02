@@ -7,6 +7,7 @@ const CookiePolicy = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
+      
       <main className="flex-grow container mx-auto px-4 py-12">
         <Card className="max-w-4xl mx-auto shadow-lg">
           <CardHeader className="bg-biella-blue text-white">

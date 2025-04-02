@@ -19,11 +19,11 @@ export default function Navbar() {
 
         {/* Desktop menu */}
         <div className="hidden lg:flex space-x-8">
-          <a href="#home" className="font-medium text-gray-700 hover:text-biella-red transition-colors">Home</a>
-          <a href="#servizi" className="font-medium text-gray-700 hover:text-biella-red transition-colors">Servizi</a>
-          <a href="#corsi" className="font-medium text-gray-700 hover:text-biella-red transition-colors">Corsi</a>
-          <a href="#chi-siamo" className="font-medium text-gray-700 hover:text-biella-red transition-colors">Chi Siamo</a>
-          <a href="#contatti" className="font-medium text-gray-700 hover:text-biella-red transition-colors">Contatti</a>
+          <a href="/#home" className="font-medium text-gray-700 hover:text-biella-red transition-colors">Home</a>
+          <a href="/#servizi" className="font-medium text-gray-700 hover:text-biella-red transition-colors">Servizi</a>
+          <a href="/#corsi" className="font-medium text-gray-700 hover:text-biella-red transition-colors">Corsi</a>
+          <a href="/#chi-siamo" className="font-medium text-gray-700 hover:text-biella-red transition-colors">Chi Siamo</a>
+          <a href="/#contatti" className="font-medium text-gray-700 hover:text-biella-red transition-colors">Contatti</a>
         </div>
 
         <div className="hidden lg:block">
