@@ -1,5 +1,6 @@
 
 import { Facebook, Instagram, Twitter } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -69,8 +70,8 @@ export default function Footer() {
         <div className="border-t border-gray-800 pt-6 text-center text-sm text-gray-500">
           <p className="transition-all duration-300 hover:text-white">© {currentYear} Autoscuola Biella Uno. Tutti i diritti riservati.</p>
           <p className="mt-2">
-            <a href="#" className="hover:text-gray-400 transition-colors">Privacy Policy</a> | 
-            <a href="#" className="hover:text-gray-400 transition-colors ml-2">Cookie Policy</a>
+            <Link to="/privacy-policy" className="hover:text-gray-400 transition-colors">Privacy Policy</Link> | 
+            <Link to="/cookie-policy" className="hover:text-gray-400 transition-colors ml-2">Cookie Policy</Link>
           </p>
         </div>
       </div>
