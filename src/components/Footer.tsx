@@ -1,4 +1,3 @@
-
 import { Facebook, Instagram, Twitter } from "lucide-react";
 
 export default function Footer() {
@@ -28,27 +27,27 @@ export default function Footer() {
             <h4 className="text-lg font-bold mb-4">Collegamenti Rapidi</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#home" className="text-gray-400 hover:text-white transition-colors">
+                <a href="/" className="text-gray-400 hover:text-white transition-colors">
                   Home
                 </a>
               </li>
               <li>
-                <a href="#servizi" className="text-gray-400 hover:text-white transition-colors">
+                <a href="/servizi" className="text-gray-400 hover:text-white transition-colors">
                   Servizi
                 </a>
               </li>
               <li>
-                <a href="#corsi" className="text-gray-400 hover:text-white transition-colors">
+                <a href="/corsi" className="text-gray-400 hover:text-white transition-colors">
                   Corsi
                 </a>
               </li>
               <li>
-                <a href="#chi-siamo" className="text-gray-400 hover:text-white transition-colors">
+                <a href="/chi-siamo" className="text-gray-400 hover:text-white transition-colors">
                   Chi Siamo
                 </a>
               </li>
               <li>
-                <a href="#contatti" className="text-gray-400 hover:text-white transition-colors">
+                <a href="/contatti" className="text-gray-400 hover:text-white transition-colors">
                   Contatti
                 </a>
               </li>
@@ -69,8 +68,8 @@ export default function Footer() {
         <div className="border-t border-gray-800 pt-6 text-center text-sm text-gray-500">
           <p>© {currentYear} Autoscuola Biella Uno. Tutti i diritti riservati.</p>
           <p className="mt-2">
-            <a href="#" className="hover:text-gray-400 transition-colors">Privacy Policy</a> | 
-            <a href="#" className="hover:text-gray-400 transition-colors ml-2">Cookie Policy</a>
+            <a href="/privacy-policy" className="hover:text-gray-400 transition-colors">Privacy Policy</a> | 
+            <a href="/cookie-policy" className="hover:text-gray-400 transition-colors ml-2">Cookie Policy</a>
           </p>
         </div>
       </div>
