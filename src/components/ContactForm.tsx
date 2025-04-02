@@ -100,17 +100,17 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contatti" className="py-16 animate-fade-in">
+    <section id="contatti" className="py-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4 animate-fade-in" style={{ animationDelay: '200ms' }}>Contattaci</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '400ms' }}>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Contattaci</h2>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Hai domande o vuoi prenotare un corso? Compila il modulo sottostante o contattaci direttamente.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="bg-white rounded-lg shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl animate-fade-in" style={{ animationDelay: '300ms' }}>
+          <div className="bg-white rounded-lg shadow-lg p-8 transition-all duration-300 hover:shadow-xl">
             <h3 className="text-2xl font-bold text-gray-800 mb-6">Richiedi Informazioni</h3>
             
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -203,12 +203,12 @@ export default function ContactForm() {
             </form>
           </div>
           
-          <div className="lg:pl-8 animate-fade-in" style={{ animationDelay: '500ms' }}>
+          <div className="lg:pl-8">
             <h3 className="text-2xl font-bold text-gray-800 mb-6">I Nostri Contatti</h3>
             
             <div className="space-y-8">
               <div className="flex items-start transform transition-all duration-300 hover:-translate-y-1">
-                <div className="mr-4 bg-biella-blue text-white p-3 rounded-full shadow-md animate-pulse">
+                <div className="mr-4 bg-biella-blue text-white p-3 rounded-full shadow-md">
                   <MapPin className="h-6 w-6" />
                 </div>
                 <div>
@@ -219,7 +219,7 @@ export default function ContactForm() {
               </div>
               
               <div className="flex items-start transform transition-all duration-300 hover:-translate-y-1">
-                <div className="mr-4 bg-biella-blue text-white p-3 rounded-full shadow-md animate-ping-slow">
+                <div className="mr-4 bg-biella-blue text-white p-3 rounded-full shadow-md">
                   <Phone className="h-6 w-6" />
                 </div>
                 <div>
@@ -230,7 +230,7 @@ export default function ContactForm() {
               </div>
               
               <div className="flex items-start transform transition-all duration-300 hover:-translate-y-1">
-                <div className="mr-4 bg-biella-blue text-white p-3 rounded-full shadow-md animate-pulse">
+                <div className="mr-4 bg-biella-blue text-white p-3 rounded-full shadow-md">
                   <Mail className="h-6 w-6" />
                 </div>
                 <div>
