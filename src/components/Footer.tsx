@@ -23,36 +23,6 @@ export default function Footer() {
             </div>
           </div>
           
-          <div>
-            <h4 className="text-lg font-bold mb-4">Collegamenti Rapidi</h4>
-            <ul className="space-y-2">
-              <li>
-                <a href="/" className="text-gray-400 hover:text-white transition-colors">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="/servizi" className="text-gray-400 hover:text-white transition-colors">
-                  Servizi
-                </a>
-              </li>
-              <li>
-                <a href="/corsi" className="text-gray-400 hover:text-white transition-colors">
-                  Corsi
-                </a>
-              </li>
-              <li>
-                <a href="/chi-siamo" className="text-gray-400 hover:text-white transition-colors">
-                  Chi Siamo
-                </a>
-              </li>
-              <li>
-                <a href="/contatti" className="text-gray-400 hover:text-white transition-colors">
-                  Contatti
-                </a>
-              </li>
-            </ul>
-          </div>
           
           <div>
             <h4 className="text-lg font-bold mb-4">Contatti</h4>
