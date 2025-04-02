@@ -63,7 +63,8 @@ export default function Testimonials() {
 
       </div>
       <div className="text-center mt-12">
-        <a href="https://altraopinione.org/" className="inline-block px-6 py-3 text-grey-600 font-semibold">
+        <p className="text-gray-400 mb-4">Vuoi lasciare la tua opinione?</p>
+        <a href="https://altraopinione.org/" className="inline-block px-6 py-3 text-grey-500 font-semibold underline">
         altraopinione.org
         </a>
       </div>
