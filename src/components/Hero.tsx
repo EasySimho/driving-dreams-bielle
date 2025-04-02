@@ -1,12 +1,48 @@
-
 import { Button } from "@/components/ui/button";
+import React, { useState, useEffect } from 'react';
 
 export default function Hero() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const backgroundImages = [
+    "/hero/1.jpg",
+    "/hero/2.jpg",
+    "/hero/3.jpg",
+    "/hero/4.jpg"
+  ];
+  
+  // Cambia immagine ogni 5 secondi
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex(prevIndex => 
+        prevIndex === backgroundImages.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section id="home" className="relative">
-      <div className="bg-gradient-to-r from-biella-blue/90 to-biella-red/80 py-20 md:py-32">
+    <section id="home" className="relative h-screen">
+      {/* Immagini di sfondo che ruotano */}
+      {backgroundImages.map((img, index) => (
+        <div 
+          key={index}
+          className="absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-1000"
+          style={{
+            backgroundImage: `url(${img})`,
+            opacity: index === currentImageIndex ? 1 : 0,
+          }}
+        />
+      ))}
+      
+      {/* Overlay scuro per migliorare la leggibilità del testo */}
+      <div className="absolute inset-0 bg-black/50"></div>
+      
+      {/* Contenuto testuale - ora con z-index superiore */}
+      <div className="relative z-10 h-full flex items-center">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl py-16">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
               Autoscuola Biella Uno
             </h1>

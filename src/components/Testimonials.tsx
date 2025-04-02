@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Star } from "lucide-react";
+import { Star, Quote } from "lucide-react";
+import { motion } from "framer-motion";
 
 const testimonials = [
   {
@@ -24,49 +25,67 @@ const testimonials = [
   },
   {
     name: "H.",
-    text: "Ottima autoscuola, buonissimo rapporto qualità prezzo. Ottimo personale, cordiale e gentile, ottimi i metodi di insegnamento, super moderni dal punto di vista comunicativo, con la super presenza anche social. Ti seguono per qualsiasi problematica aiutando efficacemente per la risoluzione stessa, consigliatissimo. Motzo Gian Mario",
-    rating: 5
-  },
-  {
-    name: "M. A.",
-    text: "Sono rimasto molto soddisfatto di come hanno seguito mio figlio. E' stato accompagnato passo passo per tutto il percorso, dall'iscrizione, al corso di preparazione per l'esame di teoria, fino alla guida, con un istruttore giovane e disponibilissimo. 5 stelle, meritatissime! Ve lo consiglio!",
+    text: "Ottima autoscuola, buonissimo rapporto qualità prezzo. Ottimo personale, cordiale e gentile, ottimi i metodi di insegnamento, super moderni dal punto di vista comunicativo, con la super presenza anche social.",
     rating: 5
   }
 ];
 
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 }
+};
+
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="py-16 bg-gray-50">
+    <section id="testimonials" className="py-24 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Dicono di Noi</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Dicono di Noi</h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Scopri cosa pensano i nostri studenti della loro esperienza con Autoscuola Biella Uno.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div 
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="flex mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-gray-700 mb-4 italic">"{testimonial.text}"</p>
-                <p className="text-gray-900 font-semibold">{testimonial.name}</p>
-              </CardContent>
-            </Card>
+            <motion.div key={index} variants={item}>
+              <Card className="h-full hover:shadow-xl transition-shadow duration-300 relative overflow-hidden group">
+                <CardContent className="p-8">
+                  <Quote className="absolute top-4 right-4 h-12 w-12 text-gray-100 transition-transform duration-300 group-hover:scale-110" />
+                  <div className="flex mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                  <p className="text-gray-700 mb-6 relative z-10">"{testimonial.text}"</p>
+                  <p className="text-gray-900 font-semibold">{testimonial.name}</p>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
-        </div>
-
-      </div>
-      <div className="text-center mt-12">
-        <p className="text-gray-400 mb-4">Vuoi lasciare la tua opinione?</p>
-        <a href="https://altraopinione.org/" className="inline-block px-6 py-3 text-grey-500 font-semibold underline">
-        altraopinione.org
-        </a>
+        </motion.div>
       </div>
     </section>
   );

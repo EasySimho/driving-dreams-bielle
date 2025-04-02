@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import emailjs from 'emailjs-com';
 
 export default function ContactForm() {
@@ -21,8 +21,8 @@ export default function ContactForm() {
   // Pre-configured EmailJS settings
   const emailJsConfig = {
     serviceId: "service_su5evcm",
-    ownerTemplateId: "template_c0cp8md",  // Template per il proprietario
-    clientTemplateId: "template_8cmwq5k",  // Template per il cliente
+    ownerTemplateId: "template_c0cp8md",
+    clientTemplateId: "template_8cmwq5k",
     publicKey: "JmODPdVdCt13yVm0I"
   };
 
@@ -35,12 +35,10 @@ export default function ContactForm() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    console.log("Form submitted:", formData);
-    
     try {
       // Send email to the driving school owner
       const ownerTemplateParams = {
-        to_email: "info@autoscuolabiella1.it", // Email del proprietario
+        to_email: "info@autoscuolabiella1.it",
         reply_to: formData.email,
         from_name: formData.name,
         from_email: formData.email,
@@ -58,7 +56,7 @@ export default function ContactForm() {
       
       // Send confirmation email to the client
       const clientTemplateParams = {
-        to_email: formData.email, // Email del cliente
+        to_email: formData.email,
         to_name: formData.name,
         service: formData.service,
         school_name: "Autoscuola Biella 1",
@@ -98,22 +96,24 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contatti" className="py-16">
+    <section id="contatti" className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Contattaci</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Hai domande o vuoi prenotare un corso? Compila il modulo sottostante o contattaci direttamente.
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Contattaci</h2>
+          <div className="w-20 h-1 bg-biella-red mx-auto mb-6"></div>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Hai domande sui nostri corsi? Compila il modulo sottostante o contattaci direttamente.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="bg-white rounded-lg shadow-lg p-8">
+          {/* Contact Form */}
+          <div className="bg-white rounded-lg shadow-md p-8 border-l-4 border-biella-blue">
             <h3 className="text-2xl font-bold text-gray-800 mb-6">Richiedi Informazioni</h3>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <Label htmlFor="name">Nome e Cognome*</Label>
+                <Label htmlFor="name" className="font-medium">Nome e Cognome*</Label>
                 <Input
                   id="name"
                   name="name"
@@ -121,12 +121,13 @@ export default function ContactForm() {
                   onChange={handleChange}
                   required
                   placeholder="Inserisci il tuo nome e cognome"
+                  className="mt-1"
                 />
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="email">Email*</Label>
+                  <Label htmlFor="email" className="font-medium">Email*</Label>
                   <Input
                     id="email"
                     name="email"
@@ -135,10 +136,11 @@ export default function ContactForm() {
                     onChange={handleChange}
                     required
                     placeholder="La tua email"
+                    className="mt-1"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="phone">Telefono*</Label>
+                  <Label htmlFor="phone" className="font-medium">Telefono*</Label>
                   <Input
                     id="phone"
                     name="phone"
@@ -146,18 +148,19 @@ export default function ContactForm() {
                     onChange={handleChange}
                     required
                     placeholder="Il tuo numero di telefono"
+                    className="mt-1"
                   />
                 </div>
               </div>
               
               <div>
-                <Label htmlFor="service">Servizio di interesse</Label>
+                <Label htmlFor="service" className="font-medium">Servizio di interesse</Label>
                 <select
                   id="service"
                   name="service"
                   value={formData.service}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md mt-1"
                 >
                   <option value="Patente B">Patente B</option>
                   <option value="Patente A/AM">Patente A/AM</option>
@@ -171,7 +174,7 @@ export default function ContactForm() {
               </div>
               
               <div>
-                <Label htmlFor="message">Messaggio</Label>
+                <Label htmlFor="message" className="font-medium">Messaggio</Label>
                 <Textarea
                   id="message"
                   name="message"
@@ -179,6 +182,7 @@ export default function ContactForm() {
                   onChange={handleChange}
                   placeholder="Scrivi qui la tua richiesta"
                   rows={4}
+                  className="mt-1"
                 />
               </div>
               
@@ -192,61 +196,84 @@ export default function ContactForm() {
             </form>
           </div>
           
-          <div className="lg:pl-8">
-            <h3 className="text-2xl font-bold text-gray-800 mb-6">I Nostri Contatti</h3>
+          {/* Contact Info */}
+          <div>
+            <div className="bg-white rounded-lg shadow-md p-8">
+              <h3 className="text-2xl font-bold text-gray-800 mb-6">I Nostri Contatti</h3>
+              
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <div className="mr-4 bg-biella-blue text-white p-2 rounded">
+                    <MapPin className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold mb-1">Indirizzo</h4>
+                    <p className="text-gray-600">Via Fratelli Rosselli 23/B</p>
+                    <p className="text-gray-600">13900 Biella (BI)</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="mr-4 bg-biella-blue text-white p-2 rounded">
+                    <Phone className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold mb-1">Telefono</h4>
+                    <p className="text-gray-600">+39 015 402914</p>
+                    <p className="text-gray-600">+39 345 2928 159</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="mr-4 bg-biella-blue text-white p-2 rounded">
+                    <Mail className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold mb-1">Email</h4>
+                    <p className="text-gray-600">info@biellauno.it</p>
+                  </div>
+                </div>
+                
+                <div>
+                  <div className="flex items-center mb-3">
+                    <div className="mr-4 bg-biella-blue text-white p-2 rounded">
+                      <Clock className="h-5 w-5" />
+                    </div>
+                    <h4 className="text-lg font-semibold">Orari di Apertura</h4>
+                  </div>
+                  
+                  <div className="bg-gray-50 rounded p-4 ml-9">
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="text-gray-600">Lunedì:</div>
+                      <div className="font-medium">09:00 - 12:00, 14:30 - 18:30</div>
+                      <div className="text-gray-600">Martedì:</div>
+                      <div className="font-medium">09:00 - 12:00, 15:00 - 19:00</div>
+                      <div className="text-gray-600">Mercoledì:</div>
+                      <div className="font-medium">09:00 - 12:00, 14:30 - 18:30</div>
+                      <div className="text-gray-600">Giovedì:</div>
+                      <div className="font-medium">09:00 - 12:00, 14:30 - 18:30</div>
+                      <div className="text-gray-600">Venerdì:</div>
+                      <div className="font-medium">09:00 - 12:00, 13:00 - 17:00</div>
+                      <div className="text-gray-600">Sabato:</div>
+                      <div className="font-medium">Chiuso</div>
+                      <div className="text-gray-600">Domenica:</div>
+                      <div className="font-medium">Chiuso</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             
-            <div className="space-y-8">
-              <div className="flex items-start">
-                <div className="mr-4 bg-biella-blue text-white p-3 rounded-full">
-                  <MapPin className="h-6 w-6" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold mb-1">Indirizzo</h4>
-                  <p className="text-gray-600">Via Fratelli Rosselli 23/B</p>
-                  <p className="text-gray-600">13900 Biella (BI)</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <div className="mr-4 bg-biella-blue text-white p-3 rounded-full">
-                  <Phone className="h-6 w-6" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold mb-1">Telefono</h4>
-                  <p className="text-gray-600">+39 015 402914</p>
-                  <p className="text-gray-600">+39 345 2928 159</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <div className="mr-4 bg-biella-blue text-white p-3 rounded-full">
-                  <Mail className="h-6 w-6" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold mb-1">Email</h4>
-                  <p className="text-gray-600">info@biellauno.it</p>
-                </div>
-              </div>
-              
-              <div>
-                <h4 className="text-lg font-semibold mb-3">Orari di Apertura</h4>
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="text-gray-600">Lunedì:</div>
-                  <div className="font-medium">09:00 - 12:00, 14:30 - 18:30</div>
-                  <div className="text-gray-600">Martedì:</div>
-                  <div className="font-medium">09:00 - 12:00, 15:00 - 19:00</div>
-                  <div className="text-gray-600">Mercoledì:</div>
-                  <div className="font-medium">09:00 - 12:00, 14:30 - 18:30</div>
-                  <div className="text-gray-600">Giovedì:</div>
-                  <div className="font-medium">09:00 - 12:00, 14:30 - 18:30</div>
-                  <div className="text-gray-600">Venerdì:</div>
-                  <div className="font-medium">09:00 - 12:00, 13:00 - 17:00</div>
-                  <div className="text-gray-600">Sabato:</div>
-                  <div className="font-medium">Chiuso</div>
-                  <div className="text-gray-600">Domenica:</div>
-                  <div className="font-medium">Chiuso</div>
-                </div>
-              </div>
+            <div className="mt-6">
+              <Button 
+                className="w-full bg-biella-blue hover:bg-blue-700" 
+                size="lg"
+                asChild
+              >
+                <a href="https://maps.app.goo.gl/CwJAvqb8E2wRM4xv8" target="_blank" rel="noopener noreferrer">
+                  Visualizza su Maps
+                </a>
+              </Button>
             </div>
           </div>
         </div>

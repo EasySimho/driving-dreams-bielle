@@ -8,7 +8,7 @@ export default function Navbar() {
   
   return (
     <nav className="sticky top-0 z-50 bg-white shadow-md">
-      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+      <div className="container mx-auto px-6 py-3 flex items-center justify-between">
         <div className="flex items-center">
           <img 
             src="/lovable-uploads/fc26eac9-4b62-41bb-bb2c-e561fcf6d808.png" 
@@ -46,42 +46,42 @@ export default function Navbar() {
         <div className="lg:hidden bg-white border-t">
           <div className="container mx-auto px-4 py-2 flex flex-col space-y-3">
             <a 
-              href="#home" 
+              href="/#home" 
               className="py-2 font-medium text-gray-700 hover:text-biella-red transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Home
             </a>
             <a 
-              href="#servizi" 
+              href="/#servizi" 
               className="py-2 font-medium text-gray-700 hover:text-biella-red transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Servizi
             </a>
             <a 
-              href="#corsi" 
+              href="/#corsi" 
               className="py-2 font-medium text-gray-700 hover:text-biella-red transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Corsi
             </a>
             <a 
-              href="#chi-siamo" 
+              href="/#chi-siamo" 
               className="py-2 font-medium text-gray-700 hover:text-biella-red transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Chi Siamo
             </a>
             <a 
-              href="#contatti" 
+              href="/#contatti" 
               className="py-2 font-medium text-gray-700 hover:text-biella-red transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Contatti
             </a>
             <Button className="bg-biella-red hover:bg-red-700 text-white w-full" asChild>
-              <a href="#contatti" onClick={() => setIsMenuOpen(false)}>Richiedi Info</a>
+              <a href="/#contatti" onClick={() => setIsMenuOpen(false)}>Richiedi Info</a>
             </Button>
           </div>
         </div>
