@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+
+import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Phone, Mail, MapPin } from "lucide-react";
+import { Loader } from "@/components/ui/loader";
 import emailjs from 'emailjs-com';
 
 export default function ContactForm() {
@@ -98,17 +100,17 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contatti" className="py-16">
+    <section id="contatti" className="py-16 animate-fade-in">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Contattaci</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4 animate-fade-in" style={{ animationDelay: '200ms' }}>Contattaci</h2>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '400ms' }}>
             Hai domande o vuoi prenotare un corso? Compila il modulo sottostante o contattaci direttamente.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="bg-white rounded-lg shadow-lg p-8">
+          <div className="bg-white rounded-lg shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl animate-fade-in" style={{ animationDelay: '300ms' }}>
             <h3 className="text-2xl font-bold text-gray-800 mb-6">Richiedi Informazioni</h3>
             
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -121,6 +123,7 @@ export default function ContactForm() {
                   onChange={handleChange}
                   required
                   placeholder="Inserisci il tuo nome e cognome"
+                  className="transition-all duration-300 focus:ring-2 focus:ring-biella-blue"
                 />
               </div>
               
@@ -135,6 +138,7 @@ export default function ContactForm() {
                     onChange={handleChange}
                     required
                     placeholder="La tua email"
+                    className="transition-all duration-300 focus:ring-2 focus:ring-biella-blue"
                   />
                 </div>
                 <div>
@@ -146,6 +150,7 @@ export default function ContactForm() {
                     onChange={handleChange}
                     required
                     placeholder="Il tuo numero di telefono"
+                    className="transition-all duration-300 focus:ring-2 focus:ring-biella-blue"
                   />
                 </div>
               </div>
@@ -157,7 +162,7 @@ export default function ContactForm() {
                   name="service"
                   value={formData.service}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md transition-all duration-300 focus:ring-2 focus:ring-biella-blue focus:border-biella-blue outline-none"
                 >
                   <option value="Patente B">Patente B</option>
                   <option value="Patente A/AM">Patente A/AM</option>
@@ -179,25 +184,31 @@ export default function ContactForm() {
                   onChange={handleChange}
                   placeholder="Scrivi qui la tua richiesta"
                   rows={4}
+                  className="transition-all duration-300 focus:ring-2 focus:ring-biella-blue"
                 />
               </div>
               
               <Button 
                 type="submit" 
-                className="w-full bg-biella-red hover:bg-red-700"
+                className="w-full bg-biella-red hover:bg-red-700 transition-all duration-300 transform hover:scale-[1.02]"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Invio in corso..." : "Invia Richiesta"}
+                {isSubmitting ? (
+                  <div className="flex items-center justify-center">
+                    <Loader size={20} className="mr-2" />
+                    <span>Invio in corso...</span>
+                  </div>
+                ) : "Invia Richiesta"}
               </Button>
             </form>
           </div>
           
-          <div className="lg:pl-8">
+          <div className="lg:pl-8 animate-fade-in" style={{ animationDelay: '500ms' }}>
             <h3 className="text-2xl font-bold text-gray-800 mb-6">I Nostri Contatti</h3>
             
             <div className="space-y-8">
-              <div className="flex items-start">
-                <div className="mr-4 bg-biella-blue text-white p-3 rounded-full">
+              <div className="flex items-start transform transition-all duration-300 hover:-translate-y-1">
+                <div className="mr-4 bg-biella-blue text-white p-3 rounded-full shadow-md animate-pulse">
                   <MapPin className="h-6 w-6" />
                 </div>
                 <div>
@@ -207,8 +218,8 @@ export default function ContactForm() {
                 </div>
               </div>
               
-              <div className="flex items-start">
-                <div className="mr-4 bg-biella-blue text-white p-3 rounded-full">
+              <div className="flex items-start transform transition-all duration-300 hover:-translate-y-1">
+                <div className="mr-4 bg-biella-blue text-white p-3 rounded-full shadow-md animate-ping-slow">
                   <Phone className="h-6 w-6" />
                 </div>
                 <div>
@@ -218,8 +229,8 @@ export default function ContactForm() {
                 </div>
               </div>
               
-              <div className="flex items-start">
-                <div className="mr-4 bg-biella-blue text-white p-3 rounded-full">
+              <div className="flex items-start transform transition-all duration-300 hover:-translate-y-1">
+                <div className="mr-4 bg-biella-blue text-white p-3 rounded-full shadow-md animate-pulse">
                   <Mail className="h-6 w-6" />
                 </div>
                 <div>
@@ -228,7 +239,7 @@ export default function ContactForm() {
                 </div>
               </div>
               
-              <div>
+              <div className="transform transition-all duration-300 hover:shadow-md hover:bg-gray-50 p-4 rounded-lg">
                 <h4 className="text-lg font-semibold mb-3">Orari di Apertura</h4>
                 <div className="grid grid-cols-2 gap-2">
                   <div className="text-gray-600">Lunedì:</div>
