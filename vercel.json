@@ -1,0 +1,11 @@
+{
+    "routes": [
+      { "src": "/cookie-policy", "dest": "/" },
+      { "src": "/privacy-policy", "dest": "/" },
+      { "src": "/servizi", "dest": "/" },
+      { "src": "/corsi", "dest": "/" },
+      { "src": "/chi-siamo", "dest": "/" },
+      { "src": "/contatti", "dest": "/" },
+      { "src": "/(.*)", "dest": "/" }
+    ]
+  }
