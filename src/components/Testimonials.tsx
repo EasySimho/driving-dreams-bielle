@@ -26,6 +26,11 @@ const testimonials = [
     name: "H.",
     text: "Ottima autoscuola, buonissimo rapporto qualità prezzo. Ottimo personale, cordiale e gentile, ottimi i metodi di insegnamento, super moderni dal punto di vista comunicativo, con la super presenza anche social. Ti seguono per qualsiasi problematica aiutando efficacemente per la risoluzione stessa, consigliatissimo. Motzo Gian Mario",
     rating: 5
+  },
+  {
+    name: "M. A.",
+    text: "Sono rimasto molto soddisfatto di come hanno seguito mio figlio. E' stato accompagnato passo passo per tutto il percorso, dall'iscrizione, al corso di preparazione per l'esame di teoria, fino alla guida, con un istruttore giovane e disponibilissimo. 5 stelle, meritatissime! Ve lo consiglio!",
+    rating: 5
   }
 ];
 
@@ -55,6 +60,12 @@ export default function Testimonials() {
             </Card>
           ))}
         </div>
+
+      </div>
+      <div className="text-center mt-12">
+        <a href="https://altraopinione.org/" className="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition-colors">
+        altraopinione.org
+        </a>
       </div>
     </section>
   );
