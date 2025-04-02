@@ -6,7 +6,8 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white pt-12 pb-6">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-8">
+          {/* First column */}
           <div>
             <img
               src="/lovable-uploads/fc26eac9-4b62-41bb-bb2c-e561fcf6d808.png"
@@ -23,7 +24,7 @@ export default function Footer() {
             </div>
           </div>
           
-          
+          {/* Second column */}
           <div>
             <h4 className="text-lg font-bold mb-4">Contatti</h4>
             <address className="not-italic text-gray-400">
