@@ -27,7 +27,14 @@ const testimonials = [
     name: "H.",
     text: "Ottima autoscuola, buonissimo rapporto qualità prezzo. Ottimo personale, cordiale e gentile, ottimi i metodi di insegnamento, super moderni dal punto di vista comunicativo, con la super presenza anche social.",
     rating: 5
+  },
+  {
+    name: "M. A.",
+    text: "Sono rimasto molto soddisfatto di come hanno seguito mio figlio. E' stato accompagnato passo passo per tutto il percorso, dall'iscrizione, al corso di preparazione per l'esame di teoria, fino alla guida, con un istruttore giovane e disponibilissimo. 5 stelle, meritatissime! Ve lo consiglio!",
+    rating: 5
   }
+
+
 ];
 
 const container = {
@@ -49,7 +56,7 @@ export default function Testimonials() {
   return (
     <section id="testimonials" className="py-24 bg-white">
       <div className="container mx-auto px-4">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -62,7 +69,7 @@ export default function Testimonials() {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
@@ -86,6 +93,12 @@ export default function Testimonials() {
             </motion.div>
           ))}
         </motion.div>
+      </div>
+      <div className=" text-center mt-8">
+        <p className="text-gray-500 text-lg">Leggi tutte le recensioni</p>
+        <a className="hover:underline text-zinc-700 h-1 w-full mt-8" href="https://altraopinione.org/autoscuola/biella/autoscuola-biella-uno-s-n-c-di/">
+          altraopinione.org
+        </a>
       </div>
     </section>
   );
